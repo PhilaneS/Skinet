@@ -36,9 +36,15 @@ namespace Infrastructure
         {
             return await ApplySpecification(spec).ToListAsync();
         }
+        public async Task<int> CountAsynch(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).CountAsync();
+        }
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
         {
                return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(),spec); 
         }
+
+       
     }
 }
