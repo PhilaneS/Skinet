@@ -34,7 +34,7 @@ namespace API
             {
                     options.AddPolicy("CoresPolicy",policy =>
                     {
-                        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost");
+                        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
                     });
             });
             
