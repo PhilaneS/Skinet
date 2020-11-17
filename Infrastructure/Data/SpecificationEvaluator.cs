@@ -23,7 +23,8 @@ namespace Infrastructure.Data
            }
 
            if(spec.OrderbyDescending !=null) {
-               query = query.OrderBy(spec.OrderbyDescending);
+               
+               query = query.OrderByDescending(spec.OrderbyDescending);
            }
 
            if(spec.IsPagingEnabled) 
