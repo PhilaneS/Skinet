@@ -1,3 +1,4 @@
+import { IProduct } from 'src/app/shared/models/product';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IBrand } from '../shared/models/Brand';
@@ -47,5 +48,8 @@ baseUrl = 'https://localhost:5001/api/';
   }
   getProductTypes() {
    return this.http.get<IProductType[]>(this.baseUrl + 'products/types');
+  }
+  getProduct(id: number){
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 }
