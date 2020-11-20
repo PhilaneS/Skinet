@@ -14,10 +14,10 @@ export class ShopComponent implements OnInit {
 @ViewChild('search', { static: false }) searchTerm: ElementRef;
 products: IProduct[];
 brands: IBrand[];
-productTypes: IProductType[];
+types: IProductType[];
 shopParams = new ShopParams();
 totalCount: number;
-sortOptions =[
+sortOptions = [
   { name: 'Alphabetical', value: 'name'},
   { name: 'Price: Low to High', value: 'priceAsc'},
   { name: 'High to Low', value: 'priceDesc'},
@@ -50,7 +50,7 @@ sortOptions =[
   }
   getProductTypes(){
     this.shopService.getProductTypes().subscribe(response => {
-      this.productTypes = [{id: 0, name: 'All'}, ...response];
+      this.types = [{id: 0, name: 'All'}, ...response];
     }, error => {
       console.log(error);
     });
