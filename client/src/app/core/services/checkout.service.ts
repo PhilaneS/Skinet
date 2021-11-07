@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { IDeliveryMethod } from 'src/app/shared/models/DeliveryMethod';
+import { IOrderToCreate } from 'src/app/shared/models/order';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,10 +13,13 @@ baseUrl = environment.apiUrl;
 constructor(private http: HttpClient) { }
 
 getDeliveryMethods(){
-  return this.http.get(this.baseUrl +"orders/deliveryMethods").pipe(
+  return this.http.get(this.baseUrl + 'orders/deliveryMethods').pipe(
     map((dm: IDeliveryMethod[]) => {
-      return dm.sort((a,b) => b.price - a.price);
+      return dm.sort((a, b) => b.price - a.price);
     })
   );
+}
+createOrder(order: IOrderToCreate) {
+ return this.http.post(this.baseUrl + 'orders', order);
 }
 }

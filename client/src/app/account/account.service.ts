@@ -5,6 +5,7 @@ import { ok } from 'assert';
 import { BehaviorSubject, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { IAddress } from '../shared/models/address';
 import { IUser } from '../shared/models/user';
 
 @Injectable({
@@ -20,7 +21,7 @@ currentUser$ = this.currentUserSource.asObservable();
   }
   loadCurrentUser(token: string){
 
-    if(token ===null){
+    if (token === null){
       this.currentUserSource.next(null);
       return of (null);
     }
@@ -28,29 +29,29 @@ currentUser$ = this.currentUserSource.asObservable();
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
 
-   return this.http.get(this.baseUrl + 'account', { headers}).pipe(
-      map((user : IUser) =>{
-        if(user) {
-          localStorage.setItem('token',user.token);
+    return this.http.get(this.baseUrl + 'account', { headers}).pipe(
+      map((user: IUser) => {
+        if (user) {
+          localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
         }
       })
     );
   }
   login(values: any){
-    return this.http.post(this.baseUrl + 'account/login',values).pipe(
+    return this.http.post(this.baseUrl + 'account/login', values).pipe(
       map((user: IUser) => {
-        if(user) {
-            localStorage.setItem("token",user.token);
+        if (user) {
+            localStorage.setItem('token', user.token);
             this.currentUserSource.next(user);
         }
       })
-    )
+    );
   }
   register(values: any){
-    return this.http.post(this.baseUrl + 'account/register',values).pipe(
-      map((user: IUser)=> {
-        localStorage.setItem('token',user.token);
+    return this.http.post(this.baseUrl + 'account/register', values).pipe(
+      map((user: IUser) => {
+        localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
       })
     );
@@ -61,6 +62,12 @@ currentUser$ = this.currentUserSource.asObservable();
     this.router.navigateByUrl('/');
   }
   checkEmailExists(email: string){
-    return this.http.get(this.baseUrl + 'account/emailexists?email='+ email);
+    return this.http.get(this.baseUrl + 'account/emailexists?email=' + email);
+  }
+  getUserAddress() {
+    return this.http.get(this.baseUrl + 'account/address');
+  }
+  updateAddress(address: IAddress) {
+   return this.http.put(this.baseUrl + 'account/address', address);
   }
 }
