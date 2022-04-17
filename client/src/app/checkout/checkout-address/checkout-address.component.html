@@ -1,7 +1,13 @@
 <div class="mt-4" [formGroup]="checkoutForm">
     <div class="d-flex justify-content-between align-items-center">
         <h4>Shipping Address</h4>
-        <button class="btn btn-outline-success">Save as default address</button>
+        <button
+        (click)="saveUserAddress()"
+        [disabled]="!checkoutForm.get('addressForm').valid ||
+        !checkoutForm.get('addressForm').dirty"
+        class="btn btn-outline-success mb-3">
+        Save as default address
+      </button>
     </div>
     <div class="row" formGroupName="addressForm">
         <div class="form-group col-6">
@@ -20,7 +26,15 @@
             <app-text-input [label]="'State'" formControlName="state"></app-text-input>
         </div>
         <div class="form-group col-6">
-            <app-text-input [label]="'Zip Code'" formControlName="zipcode"></app-text-input>
+            <app-text-input [label]="'Zip Code'" formControlName="zipCode"></app-text-input>
         </div>
     </div>
+</div>
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+  <button class="btn btn-outline-primary" routerLink="/basket">
+    <i class="fa fa-angle-left"> Back to Basket</i>
+  </button>
+  <button class="btn btn-primary" CdkStepperNext>
+    <i class="fa fa-angle-left"> Go to delivery</i>
+  </button>
 </div>
