@@ -4,3 +4,5 @@ appsettings.json
 *.db
 *.rdb
 Properties
+/.vs/skinet/DesignTimeBuild
+/.vs/skinet
